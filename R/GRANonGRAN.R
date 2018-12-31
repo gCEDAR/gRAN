@@ -117,7 +117,7 @@ GRANonGRAN <- function(repo) {
         old_grancore_ver <- mini_df$lastbuiltversion[mini_df$name == pkgs[3]]
         
         ## Construct raw Github URLs for DESCRIPTION files of GRAN and switchr
-        github_user <- "gmbecker"
+        github_user <- "gCEDAR"
         github_base_url <- "https://github.com"
         github_raw_base <- "https://raw.githubusercontent.com"
         repo_names <- c("switchr", #[1]
