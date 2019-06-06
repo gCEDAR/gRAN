@@ -4,6 +4,7 @@ setMethod("makeRepo", "PkgManifest",
           function(x, cores = 1, build_pkgs = NULL,
                    scm_auth = list("bioconductor.org" =
                        c("readonly", "readonly")),
+                   build_gran = TRUE,
                    ...
                    ) {
 
@@ -13,7 +14,7 @@ setMethod("makeRepo", "PkgManifest",
                   versions = vers)
 
               makeRepo(sessMan, cores = cores, scm_auth = scm_auth,
-                       build_pkgs = build_pkgs,
+                       build_pkgs = build_pkgs, build_gran = build_gran,
                        ...)
           })
 
@@ -25,12 +26,13 @@ setMethod("makeRepo", "SessionManifest",
           function(x, cores = 1, build_pkgs = NULL,
                    scm_auth = list("bioconductor.org" =
                        c("readonly", "readonly")),
+                   build_gran = TRUE,
                    ...
                    ) {
 
               repo = GRANRepository(manifest = x, param = RepoBuildParam(...))
               makeRepo(repo, cores = cores, scm_auth = scm_auth,
-                       build_pkgs = build_pkgs, ...)
+                       build_pkgs = build_pkgs, build_gran = build_gran, ...)
           })
 
 
@@ -42,6 +44,7 @@ setMethod("makeRepo", "GRANRepository",
           function(x, cores = 1, build_pkgs = NULL,
                    scm_auth = list("bioconductor.org" =
                                        c("readonly", "readonly")),
+                   build_gran = TRUE,
                    ...) {
     message(paste("Started makeRepo at", Sys.time()))
     if(!haveGit()) {
@@ -82,7 +85,9 @@ setMethod("makeRepo", "GRANRepository",
 
     message(paste("Building", sum(getBuilding(repo)), "packages"))
     ##package, build thine self!
-    repo = GRANonGRAN(repo)
+    if (build_gran) {
+        repo = GRANonGRAN(repo)
+    }
     ##do checkouts
     message(paste("Starting makeSrcDirs", Sys.time()))
     message(paste("Building", sum(getBuilding(repo)), "packages"))
@@ -124,6 +129,7 @@ setMethod("makeRepo", "character",
           function(x, cores = 1, build_pkgs = NULL,
                    scm_auth = list("bioconductor.org" =
                        c("readonly", "readonly")),
+                   build_gran = TRUE,
                    ...) {
 
               if(!grepl("^(http|git|.*repo\\.R)", x))
@@ -137,5 +143,5 @@ setMethod("makeRepo", "character",
                        "with the location",
                        x)
               makeRepo(repo, cores = cores, build_pkgs = build_pkgs,
-                       scm_auth = scm_auth, ...)
+                       scm_auth = scm_auth, build_gran = build_gran, ...)
           })

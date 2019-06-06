@@ -13,20 +13,25 @@
 \alias{makeRepo,character}
 \title{makeRepo}
 \usage{
-makeRepo(x, cores = 1, build_pkgs = NULL, scm_auth = list(bioconductor.org
-  = c("readonly", "readonly")), ...)
+makeRepo(x, cores = 1, build_pkgs = NULL,
+  scm_auth = list(bioconductor.org = c("readonly", "readonly")),
+  build_gran = TRUE, ...)
 
 \S4method{makeRepo}{PkgManifest}(x, cores = 1, build_pkgs = NULL,
-  scm_auth = list(bioconductor.org = c("readonly", "readonly")), ...)
+  scm_auth = list(bioconductor.org = c("readonly", "readonly")),
+  build_gran = TRUE, ...)
 
 \S4method{makeRepo}{SessionManifest}(x, cores = 1, build_pkgs = NULL,
-  scm_auth = list(bioconductor.org = c("readonly", "readonly")), ...)
+  scm_auth = list(bioconductor.org = c("readonly", "readonly")),
+  build_gran = TRUE, ...)
 
 \S4method{makeRepo}{GRANRepository}(x, cores = 1, build_pkgs = NULL,
-  scm_auth = list(bioconductor.org = c("readonly", "readonly")), ...)
+  scm_auth = list(bioconductor.org = c("readonly", "readonly")),
+  build_gran = TRUE, ...)
 
 \S4method{makeRepo}{character}(x, cores = 1, build_pkgs = NULL,
-  scm_auth = list(bioconductor.org = c("readonly", "readonly")), ...)
+  scm_auth = list(bioconductor.org = c("readonly", "readonly")),
+  build_gran = TRUE, ...)
 }
 \arguments{
 \item{x}{The object containing the information necessary to create the repository}
@@ -40,6 +45,8 @@ repository. Defaults to \code{NULL} which builds all packages in the manifest}
 out package sources. The list elements (assumed to be a character vector of
 length 2, user then password) are applied when the name is contained in a
 package's url}
+
+\item{build_gran}{Whether to build GRAN itself}
 
 \item{...}{Additional arguments, typically used for the construction of a
 \code{GRANRepository} object if one does not already exist.}
