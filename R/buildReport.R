@@ -34,8 +34,7 @@ buildReport <- function(repo, theme = "bootstrap",
   } else {
     subheader <- ""
   }
-  summary_header <- paste0("<h2>Overall Build Stats for GRAN",
-                          repo_name(repo), "</h2>")
+  summary_header <- paste0("<h2>Overall Build Stats</h2>")
   results_df <- repo_results(repo)
   results_df <- results_df[!(results_df$name %in% suspended_pkgs(repo)), ]
   lastattempt <- results_df$lastAttemptStatus
