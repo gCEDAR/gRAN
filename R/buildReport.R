@@ -30,7 +30,7 @@ buildReport <- function(repo, theme = "bootstrap",
   title <- paste0("<title>", common_name, "</title>")
   topheader <- paste0("<h1><center>", common_name, "</center></h1>")
   if ((nchar(r_version(repo)) > 0) && (nchar(bioc_version(repo) > 0))) {
-    subheader <- paste0("<h2><center>(R ", r_version(repo), "/Bioc ", bioc_version, ")</center></h2>")
+    subheader <- paste0("<h2><center>(R ", r_version(repo), "/Bioc ", bioc_version(repo), ")</center></h2>")
   } else {
     subheader <- ""
   }
