@@ -22,7 +22,7 @@ buildReport <- function(repo, theme = "bootstrap",
                 cores = 1L) {
 
   # Overall Build Stats
-  if (nchar(platform(repo) > 0)) {
+  if (nchar(platform(repo)) > 0) {
     common_name <- paste0("GRAN", repo_name(repo), " Build Report on ", platform(repo))
   } else {
     common_name <- paste0("GRAN", repo_name(repo), " Build Report")
