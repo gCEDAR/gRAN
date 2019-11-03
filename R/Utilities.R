@@ -51,6 +51,7 @@ getCheckoutLocs <- function(codir, manifest = manifest_df(repo),
     name = manifest$name)
 }
 
+#' @importFrom desc desc_get_maintainer
 getMaintainers <- function(codir, manifest = manifest_df(repo),
     branch = manifest$branch, repo) {
     sapply(getCheckoutLocs(codir, manifest = manifest), function(x) {
@@ -59,7 +60,7 @@ getMaintainers <- function(codir, manifest = manifest_df(repo),
         else {
             ## some github packages don't know how to construct
             ## DESCRIPTION files ... *mumble*
-            tryCatch(read.dcf(file.path(x, "DESCRIPTION"))[,"Maintainer"],
+            tryCatch(desc_get_maintainer(file.path(x, "DESCRIPTION")),
                      error = function(x) NA)
         }
     })
